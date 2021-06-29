@@ -140,9 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Flip.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
