@@ -21,6 +21,11 @@ void ShowRecord() // Вывести таблицу лидеров
 	system("cls"); // Очистка экрана
 	fstream File; // Объект для работы с файлами
 	string Strok; // Строка через которую считываются данные из файла
+	string S = "";
+	for (int i = 0; i < 40; i++)
+	{
+		S = S + " ";
+	}
 	File.open("Records.txt", ios_base::in);// Открываем файл для чтения
 	if (!File.is_open()) // Если  файл не открылся 
 	{
@@ -28,10 +33,7 @@ void ShowRecord() // Вывести таблицу лидеров
 		{
 			cout << endl;
 		}
-		for (int i = 0; i < 40; i++)
-		{
-			cout << " ";
-		}
+		cout << S;
 
 		cout << "Ошибка! Файл с рекордами не найден." << endl;
 	}
@@ -40,12 +42,7 @@ void ShowRecord() // Вывести таблицу лидеров
 		while (!File.eof())
 		{
 			getline(File, Strok); // Считываем строку из файла
-
-			for (int i = 0; i < 50; i++)
-			{
-				cout << " ";
-			}
-
+			cout << S << "          ";
 			cout << Strok<<endl; // Вывод считанной из файла строки
 		}
 
@@ -58,20 +55,17 @@ void ShowRecord() // Вывести таблицу лидеров
 
 void SadMenu(const int& Sch) // Вывод сообщения о проигрыше
 {
+	string S = "";
 	for (int i = 8; i >= 0; i--)
 	{
 		cout << endl;
 	}
 	for (int i = 0; i < 49; i++)
 	{
-		cout << " ";
+		S = S + " ";
 	}
-	cout << "Вы проиграли(((" << endl;
-	for (int i = 0; i < 50; i++)
-	{
-		cout << " ";
-	}
-	cout << "Ваш счет: " << Sch << endl;
+	cout <<S<< "Вы проиграли(((" << endl;
+	cout <<S<< " Ваш счет: " << Sch << endl;
 	while (!_kbhit()) // До тех пор, пока не нажата хотя бы одна кнопка(ожидание)
 	{}
 	while (_kbhit()) _getch(); // Ожидание конца нажатия клавиш

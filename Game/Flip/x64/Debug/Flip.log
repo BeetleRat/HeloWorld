@@ -1,4 +1,2 @@
-﻿  Flip.cpp
-D:\GitHub\HeloWorld\Game\Flip\Flip.cpp(119,6): warning C4101: sch: неиспользованная локальная переменная
-D:\GitHub\HeloWorld\Game\Flip\Flip.cpp(119,11): warning C4101: Sch: неиспользованная локальная переменная
+﻿  Time.cpp
   Flip.vcxproj -> D:\GitHub\HeloWorld\Game\x64\Debug\Flip.exe
