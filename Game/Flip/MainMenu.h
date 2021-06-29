@@ -3,7 +3,6 @@
 #include<string>
 #include<conio.h>
 
-
 using namespace std;
 
 class Menu // Класс отрисовки игрового меню
