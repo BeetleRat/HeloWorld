@@ -141,10 +141,12 @@
   <ItemGroup>
     <ClCompile Include="Flip.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Save.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Save.h" />
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
