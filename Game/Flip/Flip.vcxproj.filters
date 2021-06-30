@@ -24,12 +24,18 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Save.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Time.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Save.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
