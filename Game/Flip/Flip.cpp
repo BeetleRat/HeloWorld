@@ -1,7 +1,5 @@
 ﻿#include <iostream>
 #include<Windows.h>
-#include <conio.h>
-#include<fstream>
 #include"Time.h"
 #include"MainMenu.h"
 #include"Save.h"
@@ -15,26 +13,6 @@ void UnSeeCursor()
 	curs.dwSize = sizeof(curs);
 	curs.bVisible = FALSE;
 	::SetConsoleCursorInfo(::GetStdHandle(STD_OUTPUT_HANDLE), &curs);
-}
-
-void SetRecord(Save& Records, int Rec) // Занести текущего участника в таблицу лидеров
-{
-	string S = "";
-	for (int i = 8; i >= 0; i--)
-	{
-		cout << endl;
-	}
-	for (int i = 0; i < 45; i++)
-	{
-		S = S + " ";
-	}
-	cout << S << "Введите ваше имя: AAA\b\b\b"; // После вывода строки отводим каретку три раза назад, таким образом участник перепишет три буквы А
-	getline(cin, S);
-	while (S.length() < 3) // Если введено меньше трех символов
-		S = S + "A"; // Добиваем до трех
-	S.erase(3, S.length() - 3); // Удаляем все символы, кроме первых трех
-	Records.SetRecord(S, Rec); // Заносим рекорд в таблицу рекордов
-	Records.SAVE();
 }
 
 void SadMenu(Save & Records, const int& Sch) // Вывод сообщения о проигрыше
@@ -53,16 +31,16 @@ void SadMenu(Save & Records, const int& Sch) // Вывод сообщения о
 	while (_getch() != 13/*Enter*/ && _getch() != 32/*Space*/)// Ждать нажатия пробела или Enter
 	{
 	}
-	if (Records.GetMin() < Sch) // Если текущий счет больше минимального в таблице лидеров
-		SetRecord(Records, Sch); //  Занести текущего участника в таблицу лидеров
+	Records.SetRecord(Sch); // Заносим рекорд в таблицу рекордов
+
 }
 
 int GameRun() 
 {
 	Matr Flip; // Объект класса матрицы отрисовки
-	int sch = 1;
-	int Sch;
-	int R = rand() % 30;
+	int sch = 1; // Счет для расчетов
+	int Sch;// Счет для вывода
+	int R = rand() % 30; // Количество кадров, через которое рисуется стена
 	while (sch != 0) 
 	{
 		Sch = sch; // Сохранить новый счет для вывода
@@ -75,15 +53,17 @@ int GameRun()
 		{
 			sch = Flip.Tack(-1); // Падение на одну строчку вниз
 		}
-
-		if (sch % (10+R) == 0) // Каждый десятый кадр
+		if (R == 0) // Если прошло R кадров
 		{
 			Flip.Walls(); // Создание стены
+			// Задание следующего R
 			if (sch < 15000)
-				R = rand() % (30 - sch / 500);
+				R = 5 + rand() % (30 - (sch / 500));
 			else
-				R = 0;
+				R = 5;
 		}
+		else
+			R--;
 		system("cls"); // Очистка консоли
 		Flip.OutPut(); // Отрисовка изображения
 

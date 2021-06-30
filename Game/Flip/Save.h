@@ -16,15 +16,14 @@ private:
 	vector<pair<int, string>> V1; // Вектор пар рекорд - имя
 	bool Permission; // Разрешение на работу функций
 	int Min; // Минимальный рекорд
+	int Size; // Количество хранимых рекордов
 
+	void CheckRecord(); // Проверка корректности списка рекордов
+	void SAVE(); // Сохранение таблицы рекордов
+	
 public:
 	Save(); // Конструктор
 	~Save();// Деструктор
-	void SAVE(); // Сохранение таблицы рекордов
 	void ShowRecord(); // Вывод списка рекордов
-	void SetRecord(string, int); // Добавление нового рекорда
-		// Геттеры
-	int GetMin();
-
-
+	void SetRecord(int); // Добавление нового рекорда
 };

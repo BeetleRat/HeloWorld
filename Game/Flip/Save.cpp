@@ -1,7 +1,10 @@
 #include "Save.h"
 
+
+
 Save::Save()
 {
+	Size = 30; // Устанавливаем количество хранимых рекордов
 	S = "";
 	File.open("Records.txt", ios_base::in|ios_base::out | ios_base::app);// Открываем файл для чтения,записи и дописи(таким образом файл создастся если до этого он не существовал)
 	if (!File.is_open()) // Если  файл не открылся 
@@ -40,7 +43,7 @@ Save::Save()
 				}
 			}
 		}
-		sort(V1.begin(), V1.end()); // Сортировка вектора
+		CheckRecord(); // Проверка корректности списка рекордов
 		Min = V1[0].first; // Сохранение минимального рекорда
 	}
 	File.close(); // Закрываем файл
@@ -49,6 +52,20 @@ Save::Save()
 Save::~Save()
 {
 	SAVE();
+}
+
+void Save::CheckRecord() // Проверка корректности списка рекордов
+{
+	while (V1.size() > Size-1) // Удаляем лишние рекорды
+		V1.pop_back();
+
+	P.second = "AAA"; // Обнуляем имя
+	P.first = 0; // Обнуляем рекорд
+
+	while (V1.size() < Size - 1) // Добавляем нехватающие
+		V1.push_back(P);
+	
+	sort(V1.begin(), V1.end()); // Сортировка вектора
 }
 
 void Save::SAVE()
@@ -94,22 +111,31 @@ void Save::ShowRecord() // Вывод списка рекордов
 	}
 }
 
-void Save::SetRecord(string name, int Rec) // Добавление нового рекорда
+void Save::SetRecord(int Rec) // Добавление нового рекорда
 {
-	if (Permission)// Если есть разрешение на работу функций
+	if (Permission&& Rec>Min)// Если есть разрешение на работу функций
 	{
-		P.second = name;
+		S = "";
+		for (int i = 8; i >= 0; i--)
+		{
+			cout << endl;
+		}
+		for (int i = 0; i < 45; i++)
+		{
+			S = S + " ";
+		}
+		cout << S << "Введите ваше имя: AAA\b\b\b"; // После вывода строки отводим каретку три раза назад, таким образом участник перепишет три буквы А
+		getline(cin, S);
+		while (S.length() < 3) // Если введено меньше трех символов
+			S = S + "A"; // Добиваем до трех
+		S.erase(3, S.length() - 3); // Удаляем все символы, кроме первых трех
+			// Сохранение результата
+		P.second = S;
 		P.first = Rec;
 		V1.push_back(P);
 		sort(V1.begin(), V1.end()); // Сортировка вектороа
 		V1.erase(V1.begin()); // Удаление минимального рекорда
+		Min = V1[0].first; // Сохранение минимального рекорда
+		SAVE();
 	}
-}
-
-int Save::GetMin()
-{
-	if (Permission)// Если есть разрешение на работу функций
-		return Min;
-	else
-		return 0;
 }
